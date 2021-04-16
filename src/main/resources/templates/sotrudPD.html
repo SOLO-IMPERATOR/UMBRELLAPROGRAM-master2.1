@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="sotrudPD">
+    <div class="container-fluid" style="padding:10px;" >
+        <div class="row" style="margin-top:8px;">
+            <div th:each="num: ${sotrudforpd}" class="col-lg-3 col-md-4 col-sm-4 col-xs-6 border border-light rounded-right otv_face_hover_add" style="padding:5px;">
+                <form th:action="@{?sendSotrudForPd}" method="post" th:object="${sotrudforpd}">
+                    <input  name="id" type="hidden" th:value="${num.id}">
+                    <input  name="infsysid" type="hidden" th:value="${infSystemChange.id}">
+                    <label>Имя</label>
+                    <input name="name"  type="text" th:value="${num.name}"  class="form-control"  placeholder="Введите имя" required>
+                    <label>Фамилия</label>
+                    <input name="family"   type="text" th:value="${num.family}"  class="form-control"  placeholder="Введите фамилию" required>
+                    <label>Отчество</label>
+                    <input name="otch"   type="text" th:value="${num.otch}"  class="form-control" placeholder="Введите отчество" required>
+                    <label>Должность</label>
+                    <input name="dolzh"   type="text" th:value="${num.dolzh}"  class="form-control" placeholder="Введите должность" required>
+                    <div class="row" style="margin-top:8px;">
+                        <div th:insert="sendbutton :: buttonchange(${num})"></div>
+                        <div th:insert="sendbutton :: buttondel(${num},'сотрудника')"></div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 border border-light rounded-right otv_face_hover_add" style="padding:5px;">
+                <form th:action="@{?sendSotrudForPd}" method="post" th:object="${sotrudforpd}">
+                    <input  name="infsysid" type="hidden" th:value="${infSystemChange.id}">
+                    <label>Имя</label>
+                    <input name="name"  type="text"  class="form-control"  placeholder="Введите имя" required>
+                    <label>Фамилия</label>
+                    <input name="family"   type="text"  class="form-control"  placeholder="Введите фамилию" required>
+                    <label>Отчество</label>
+                    <input name="otch"   type="text"   class="form-control" placeholder="Введите отчество" required>
+                    <label>Должность</label>
+                    <input name="dolzh"   type="text"  class="form-control" placeholder="Введите должность" required>
+
+                    <div class="row" style="margin-top:8px;">
+                        <div th:insert="sendbutton :: buttonsave('помещение обработки персональных данных')"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

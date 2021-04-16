@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="personal">
+		<div class="left__menu">
+			<div class="menu_element">
+				<a href="">
+					<img src="D:\kursachMY\UMBRELLAPROGRAM-master\src\main\resources\static\img\user.png" width="52" height="56" alt="user">
+					<p>Личный кабинет</p>
+				</a>
+			</div>
+			<div class="menu_element">
+				<a href="">
+					<img src="D:\kursachMY\UMBRELLAPROGRAM-master\src\main\resources\static\img\Data.png" width="73" height="54" alt="data">
+					<p>Ввод данных</p>
+				</a>
+			</div>
+			<div class="menu_element">
+				<a href="">
+					<img src="D:\kursachMY\UMBRELLAPROGRAM-master\src\main\resources\static\img\Doc.png" width="61" height="63" alt="document">
+					<p>Документация</p>
+				</a>
+			</div>
+			<form th:action="@{/logout}" method="post">
+				<div class="menu_element exit" onclick="this.form.submit();">
+					<a href="">
+						<img src="D:\kursachMY\UMBRELLAPROGRAM-master\src\main\resources\static\img\logout.png" width="63" height="70" alt="exit">
+						<p>Выход</p>
+					</a>
+				</div>
+			</form>
+		</div>
+		<div class="about__data">
+			<div class="form_operator" th:if="${operator != null}">
+				<div>
+					<label>Наименование оператора</label>
+                    <input class="form__input" name="name" th:value="${operator.name}" type="text" required disabled>
+				</div>
+                <div>
+ 					<label>Сокращенное наименование оператора</label>
+                    <input class="form__input" name="shortname" th:value="${operator.shortname}" type="text" required disabled>
+                </div>
+                <div>
+                	<label>Инн оператора</label>
+                    <input class="form__input" name="inn" th:value="${operator.inn}" type="text" required disabled>
+                </div>
+                	
+                <div>
+                	<label>Кпп оператора</label>
+                    <input class="form__input" name="kpp" th:value="${operator.kpp}" type="text" required disabled>
+                </div>
+                <div>
+                	<label>Юридический адрес</label>
+                    <input class="form__input"  name="urad" th:value="${operator.urad}" type="text" required disabled>
+                </div>
+                <div>
+                	<label>Фактический адрес</label>
+                    <input class="form__input" name="factad" th:value="${operator.factad}" type="text" required disabled>
+                </div>
+                <div>
+                	 <label>Дата регистрации</label>
+                     <input class="form__input" name="date" type="date" th:value="${operator.date}" required disabled>
+                </div>    
+        	</div>
+        	<hr>
+        	<p class="text_support">Для изменения данных необходимо обратиться в службу технической поддержки...</p>
+		</div>
+<style type="text/css">
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+ul[class],
+ol[class] {
+  padding: 0;
+}
+
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+}
+
+
+ul[class],
+ol[class] {
+  list-style: none;
+}
+
+
+a:not([class]) {
+  text-decoration:none !important;
+}
+
+article > * + * {
+  margin-top: 1em;
+}
+
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.text_support{
+font-size: 15px;
+font-weight: bold;
+line-height: 15px;
+display: flex;
+align-items: center;
+text-align: center;
+color: #000000;
+margin-top: 13px;
+}
+.about__data hr{
+margin-top:49px;width: 650px;background: rgba(157, 156, 156, 0.4); height: 3px;border: none; border-radius: 40px;
+}
+		.form__input{
+			width: 340px;
+			height: 41px;
+			background: #FFFFFF;
+			border: 2px solid #828282;
+			border-radius: 5px;
+			
+
+		}
+		.form__input:nth-child(3n) {
+                      margin-right: 0;
+        }
+		
+		.form_operator{
+			max-width: 1150px;
+			margin: 0 auto;
+			display: grid;
+        grid-template-columns: repeat(3, minmax(420px, 1fr) );
+		}
+		.form_operator label{
+			font-style: normal;
+font-weight:medium;
+font-size: 18px;
+line-height: 21px;
+align-items: left;
+text-align: left;
+
+color: #000000;
+margin-bottom: 4px;
+		}
+		.form_operator div{
+			display: flex !important;
+			flex-direction: column !important;
+			margin-right: 66px;
+			margin-bottom: 36px;
+		}
+
+
+	#with_around::after{
+		content: "";
+		position: absolute;
+
+		width: 20px;
+		height: 20px;
+		margin-left: 15px;
+		border-radius: 50%;
+		background: #42BD7B;
+	}
+	.left_p{
+		margin-right: 230px;
+	}
+
+	.about__data{
+		margin-left: 125px;
+		padding-top: 45px;
+		display: flex;
+		    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+
+	}
+	.left__menu{
+		padding-top: 112px;
+		padding-bottom: 72px;
+		position: fixed;
+		width: 125px;
+height: 100vh;
+left: 0px;
+top: 0px;
+
+background: #C4C4C4;
+	}
+	.menu_element{
+		background: #C4C4C4;
+		width: 100%;
+		height: 105px;
+		display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 9px;
+	}
+	.menu_element:hover{
+		background: rgba(152, 152, 152, 0.67);
+	}
+	.menu_element p{
+		text-align: center;
+		font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 18px;
+margin: 0;
+  font-family: Geneva, Arial, Helvetica, sans-serif;
+
+color: #95181F;
+	}
+	.menu_element a{
+text-decoration: none;
+text-align: center;
+	}
+	.menu_element img{
+		margin-bottom: 11px;
+	}
+	.exit{
+		position: absolute;
+		left: 0px;
+		bottom: 220px;
+	
+	}
+	.personal{
+		display: inline-block;
+		width: 100%;
+	}
+</style>
+</body>
+</html>

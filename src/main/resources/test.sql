@@ -1,0 +1,1 @@
+select * from operator_pers_data

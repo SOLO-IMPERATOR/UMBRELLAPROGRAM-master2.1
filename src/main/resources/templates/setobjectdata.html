@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Объекты данных</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="personal">
+    <div th:insert="object_tools :: back_button"></div><!-- Подключаем меню !-->
+    <div th:insert="object_tools :: left_menu"></div><!-- Подключаем меню !-->
+    <div class="about__data">
+        <div class="upper__all">
+            <div><h1 style="">Оператор персональных данных</h1></div>
+        </div>
+        <div class="form_operator" th:if="${operator != null}" th:each="num: ${operator}">
+            <div>
+                <label>Наименование оператора</label>
+                <input class="form__input" name="name" th:value="${num.name}" type="text" required readonly>
+            </div>
+            <div>
+                <label>Сокращенное наименование оператора</label>
+                <input class="form__input" name="shortname" th:value="${num.shortname}" type="text" required readonly>
+            </div>
+            <div>
+                <label>Инн оператора</label>
+                <input class="form__input" name="inn" th:value="${num.inn}" type="text" required readonly>
+            </div>
+
+            <div>
+                <label>Кпп оператора</label>
+                <input class="form__input" name="kpp" th:value="${num.kpp}" type="text" required readonly>
+            </div>
+            <div>
+                <label>Юридический адрес</label>
+                <input class="form__input"  name="urad" th:value="${num.urad}" type="text" required readonly>
+            </div>
+            <div>
+                <label>Фактический адрес</label>
+                <input class="form__input" name="factad" th:value="${num.factad}" type="text" required readonly>
+            </div>
+            <div>
+                <label>Дата регистрации</label>
+                <input class="form__input" name="date" type="date" th:value="${num.date}" required readonly>
+            </div>
+        </div>
+
+        <form class="form_operator" th:if="${operator == null}" th:action="@{?sendOperator}" method="post" th:object="${operator}">
+            <div>
+                <label>Наименование оператора</label>
+                <input class="form__input" name="name" type="text" required>
+            </div>
+            <div>
+                <label>Сокращенное наименование оператора</label>
+                <input class="form__input" name="shortname" type="text" required>
+            </div>
+            <div>
+                <label>Инн оператора</label>
+                <input class="form__input" name="inn" type="text" required>
+            </div>
+
+            <div>
+                <label>Кпп оператора</label>
+                <input class="form__input" name="kpp" type="text" required>
+            </div>
+            <div>
+                <label>Юридический адрес</label>
+                <input class="form__input"  name="urad" type="text" required>
+            </div>
+            <div>
+                <label>Фактический адрес</label>
+                <input class="form__input" name="factad" type="text" required>
+            </div>
+            <div>
+                <label>Дата регистрации</label>
+                <input class="form__input" name="date" type="date" required>
+            </div>
+            <div>
+
+            </div>
+            <div class="divFor_button_submit">
+                <input class="button_submit" type="submit" value="Добавить">
+            </div>
+        </form>
+        <hr>
+        <p th:if="${operator != null}"  class="text_support">Для изменения данных необходимо обратиться в службу технической поддержки...</p>
+        <p th:if="${operator == null}"  class="text_support">Будьте внимательны при заполнении информации. В случае допуска ошибки вам придется обратиться в тех.поддержку для <br> решения данного вопроса.</p>
+    </div>
+</div>
+</body>
+</html>

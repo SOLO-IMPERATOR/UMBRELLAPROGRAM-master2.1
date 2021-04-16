@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="OtvFace">
+<div class="container-fluid" style="padding:10px;" >
+    <div class="row" style="margin-top:8px;">
+
+        <div th:each ="num: ${otvFace}"  th:if="${num.operatorid == operatorChange.id}"  class="col-lg-3 col-md-4 col-sm-4 col-xs-6 border border-light rounded-right otv_face_hover" style="padding:5px;" >
+            <form th:action="@{?sendOtvFace}"   method="post" th:object="${num}">
+                <input  name="id" type="hidden" th:value="${num.id}">
+                <input name="operatorid"  type="hidden" th:value="${num.operatorid}">
+                <label>Имя</label>
+                <input name="name"  type="text" th:value="${num.name}"  class="form-control" id="exampleNameOtv" aria-describedby="NameOtv" placeholder="Введите имя" required>
+                <label>Фамилия</label>
+                <input name="family"   type="text" th:value="${num.family}"  class="form-control" id="exampleFamilyOtv" aria-describedby="FamilyOtv" placeholder="Введите фамилию" required>
+                <label>Отчество</label>
+                <input name="otch"   type="text" th:value="${num.otch}"  class="form-control" id="exampleOtchOtv" aria-describedby="OtchOtv" placeholder="Введите отчество" required>
+                <label>Должность</label>
+                <input name="Dolzh"   type="text" th:value="${num.Dolzh}"  class="form-control" id="" aria-describedby="OtchOtv" placeholder="Введите должность" required>
+                <label>Роль</label>
+                <select name="role" class="custom-select" required>
+                    <option th:value="${num.role}" th:text="${num.role}" selected></option>
+                    <option th:if="${num.role!='Председатель комиссии'}">Председатель комиссии</option>
+                    <option th:if="${num.role!='Секретарь комиссии'}">Секретарь комиссии</option>
+                    <option th:if="${num.role!='Член комиссии'}">Член комиссии</option>
+                </select>
+                <div class="row" style="margin-top:8px;">
+                    <div th:insert="sendbutton :: buttonchange(${num})"></div>
+                    <div th:insert="sendbutton :: buttondel(${num},'ответсвенного')"></div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-6 border border-light rounded-right otv_face_hover_add" style="padding:5px;">
+            <form th:action="@{?sendOtvFace}"   method="post" th:object="${otvFace}">
+                <input name="operatorid"  type="hidden" th:value="${operatorChange.id}">
+                <label>Имя</label>
+                <input name="name" type="text" class="form-control"  placeholder="Введите имя" >
+                <label>Фамилия</label>
+                <input name="family" type="text"class="form-control"  placeholder="Введите фамилия"  >
+                <label>Отчество</label>
+                <input name="otch" type="text"  class="form-control"  placeholder="Введите отчество"  >
+                <label>Должность</label>
+                <input name="Dolzh"   type="text"  class="form-control"  aria-describedby="OtchOtv" placeholder="Введите должность" required>
+                <label>Роль</label>
+                <select name="role" class="custom-select" required>
+                    <option>Председатель комиссии</option>
+                    <option>Заместитель председателя комиссии</option>
+                    <option>Секретарь комиссии</option>
+                    <option>Член комиссии</option>
+                    <option>Член комиссии</option>
+                    <option>Руководитель оператора</option>
+                    <option>Ответственный за организацию обработки ПДн</option>
+                    <option>Ответственный за обеспечение безопасности ПДн</option>
+                </select>
+                <div class="row" style="margin-top:8px;">
+                    <div th:insert="sendbutton :: buttonsave('ответственного')"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

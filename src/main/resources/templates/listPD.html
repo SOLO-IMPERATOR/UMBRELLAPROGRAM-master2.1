@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="listPD">
+    <div class="container-fluid" style="padding:10px;" >
+        <table   class="table table-striped custom-table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Наименование ПД</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr  th:each="num,status : ${ListPd}">
+                <form th:action="@{?sendPD}" method="post" th:object="${pd}">
+                    <th scope="row" th:text="${status.index+1}"></th>
+                    <input name="id" type="hidden" th:value="${num.id}">
+                    <input name="pd" type="hidden" th:value="${infSystemChange.id}">
+                    <td  style="width:100%;">
+                        <input name="text" type="text" th:value="${num.text}" style="background:none;border:none;width:100%;outline:none;">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-sub-margin" data-toggle="modal" th:attr="data-target='#AddModalOtv'+${num.id}" >
+                            Добавить
+                        </button>
+                        <!— Modal —>
+                        <div class="modal fade" th:attr="id='AddModalOtv'+${num.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:attr="id='AddModalOtv'+${num.id}+'Label'">Окно подтверждения</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" th:text="${'Вы действительно хотите добавить персональные данные?'}">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
+                                        <button name="send" type="submit" value="1" class="btn btn-primary">Добавить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div th:insert="sendbutton :: buttonchange(${num})"></div>
+                    </td>
+                    <td>
+                        <div th:insert="sendbutton :: buttondel(${num},'персональные данные')"></div>
+                    </td>
+                </form>
+            </tr>
+            <tr>
+                <form method="post" th:action="@{?sendPD}" th:object="${pd}">
+                    <th scope="row">New</th>
+                    <td style="width:100%;">
+                        <input name="text" type="text" style="background:none;border:none;width:100%;outline:none;">
+                    </td>
+                    <td><button  style="float:left;" type="button" class="btn btn-secondary btn-sub-margin" data-toggle="modal" data-target="#AddModalOtvNew">
+                        Создать
+                    </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="AddModalOtvNew" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="AddModalOtvNewLabel">Окно подтверждения</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" th:text="${'Вы действительно хотите добавить персональные данные?'}">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
+                                        <button  name="send" type="submit" value="4" class="btn btn-primary">Добавить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td >
+
+                    </td>
+                </form>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+
+        <table class="table custom-table table-hover">
+            <caption th:text="${infSystemChange.shortName}"></caption>
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Наименование ПД</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  th:each="num,status : ${ListPDInf}">
+                <form th:action="@{?sendPD}" method="post" >
+                    <th scope="row" th:text="${status.index+1}"></th>
+                    <input name="id" type="hidden" th:value="${num.id}">
+
+                    <td  style="width:100%;">
+                        <p th:text="${num.PD.text}"></p>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-success btn-sub-margin" data-toggle="modal" th:attr="data-target='#AddModalOtv'+${num.id}" >
+                            Удалить
+                        </button>
+                        <!— Modal —>
+                        <div class="modal fade" th:attr="id='AddModalOtv'+${num.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" th:attr="id='AddModalOtv'+${num.id}+'Label'">Окно подтверждения</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" th:text="${'Вы действительно хотите удалить персональные данные из системы?'}">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Нет</button>
+                                        <button name="send" type="submit" value="5" class="btn btn-primary">Удалить</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

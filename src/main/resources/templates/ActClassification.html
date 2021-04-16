@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="ActClassification">
+
+    <div class="container-fluid" style="padding:10px;" >
+       <div class="row" style="margin-top:8px;">
+      <div th:each="num: ${ActClassif}" class="col-lg-3 col-md-4 col-sm-4 col-xs-6 border border-light rounded-right otv_face_hover" style="padding:5px;" >
+          <form th:action="@{?sendAct}" method="post" th:object="${actClassfifcation}">
+              <input  name="id" th:value="${num.id}" type="hidden">
+              <input  name="infsysid" th:value="${infSystemChange.id}" type="hidden">
+              <label>Уровень значимости конфедициальности</label>
+              <select class="custom-select" name="lvlConfid">
+                  <option selected th:text="${num.lvlConfid}"></option>
+                  <option th:if="${num.lvlConfid!='Низкий'}" value="Низкий">Низкий</option>
+                  <option th:if="${num.lvlConfid!='Средний'}" value="Средний">Средний</option>
+                  <option th:if="${num.lvlConfid!='Высокий'}" value="Высокий">Высокий</option>
+              </select>
+              <label>Уровень значимости целостности</label>
+              <select class="custom-select" name="lvlCell">
+                  <option selected th:text="${num.lvlCell}" ></option>
+                  <option th:if="${num.lvlCell!='Низкий'}" value="Низкий">Низкий</option>
+                  <option th:if="${num.lvlCell!='Средний'}" value="Средний">Средний</option>
+                  <option th:if="${num.lvlCell!='Высокий'}" value="Высокий">Высокий</option>
+              </select>
+              <label>Уровень значимости доступности</label>
+              <select class="custom-select" name="lvlAccess">
+                  <option selected th:text="${num.lvlAccess}" ></option>
+                  <option th:if="${num.lvlAccess!='Низкий'}" value="Низкий">Низкий</option>
+                  <option th:if="${num.lvlAccess!='Средний'}" value="Средний">Средний</option>
+                  <option th:if="${num.lvlAccess!='Высокий'}" value="Высокий">Высокий</option>
+              </select>
+              <label>Масштаб информационной системы</label>
+              <select class="custom-select" name="mashtab">
+                  <option selected th:text="${num.mashtab}" ></option>
+                  <option  th:if="${num.mashtab!='Объектовый'}" value="Объектовый">Объектовый</option>
+                  <option  th:if="${num.mashtab!='Региональный'}" value="Региональный">Региональный</option>
+                  <option  th:if="${num.mashtab!='Федеральный'}" value="Федеральный">Федеральный</option>
+              </select>
+
+              <div class="row" style="margin-top:8px;">
+                  <div th:insert="sendbutton :: buttonchange(${infSystemChange})"></div>
+                  <div th:insert="sendbutton :: buttondel(${infSystemChange},'акт классификации')"></div>
+
+              </div>
+          </form>
+      </div>
+          <div th:if="${ActClassif.size()<1}" class="col-lg-3 col-md-4 col-sm-4 col-xs-6 border border-light rounded-right otv_face_hover" style="padding:5px;" >
+                    <form th:action="@{?sendAct}" method="post" th:object="${actClassfifcation}">
+                        <input  name="infsysid" th:value="${infSystemChange.id}"  type="hidden">
+                        <label>Уровень значимости конфедициальности</label>
+                        <select class="custom-select" name="lvlConfid">
+                            <option  value="Низкий">Низкий</option>
+                            <option  value="Средний">Средний</option>
+                            <option  value="Высокий">Высокий</option>
+                        </select>
+                        <label>Уровень значимости целостности</label>
+                        <select class="custom-select" name="lvlCell">
+                            <option  value="Низкий">Низкий</option>
+                            <option  value="Средний">Средний</option>
+                            <option  value="Высокий">Высокий</option>
+                        </select>
+                        <label>Уровень значимости доступности</label>
+                        <select class="custom-select" name="lvlAccess">
+                            <option  value="Низкий">Низкий</option>
+                            <option  value="Средний">Средний</option>
+                            <option  value="Высокий">Высокий</option>
+                        </select>
+                        <label>Масштаб информационной системы</label>
+                        <select class="custom-select" name="mashtab">
+                            <option   value="Объектовый">Объектовый</option>
+                            <option   value="Региональный">Региональный</option>
+                            <option   value="Федеральный">Федеральный</option>
+                        </select>
+                        <div class="row" style="margin-top:8px;">
+                            <div th:insert="sendbutton :: buttonsave('акт классификации')"></div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

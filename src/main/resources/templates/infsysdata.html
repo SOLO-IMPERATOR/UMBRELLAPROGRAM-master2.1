@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Объекты данных</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="personal">
+    <div th:insert="object_tools :: back_button"></div><!-- Подключаем меню !-->
+    <div th:insert="object_tools :: left_menu"></div><!-- Подключаем меню !-->
+        <div class="object__data">
+            <div class="upper__all">
+                <div><h1 style="">Информационные системы</h1></div>
+            </div>
+            <div class="wrapper_button__data">
+                <div th:if="${listinfsys != null}" th:each="num: ${listinfsys}" class="button__data">
+                    <p th:text="${num.shortName}"></p>
+                    <div class="button_line_select">
+                        <div class="line_select_obj">
+                            <form th:action="@{/data/IS?GetInformationSystem}" method="GET">
+                                <input type="hidden" name="idoperatorForis" th:value="${num.id}">
+                                <input class="select_obj_button" type="submit" name="go" value="Перейти">
+                            </form>
+                        </div>
+                        <div class="line_select_obj">
+                            <form th:action="@{/data/IS?getInfsystem}" method="GET">
+                                <input type="hidden" name="infsysId" th:value="${num.id}">
+                                <input class="select_obj_button"  type="submit" name="info" value="Информация">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="button__data add">
+                    <form th:action="@{/data/IS}" id="Form_getFormInfsys" method="GET" > <input type="hidden" name="GetFormInfsys" value=""></form>
+                    <p>+ Добавить</p>
+                </div>
+            </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function showmenu(id){
+    var e =window.event;
+        $('.button_menu').css({"display": "none"})
+        $('input[name=infsysId]').val(id);
+        var x =e.pageX;
+        var y= e.pageY;
+        $('.button_menu').css({"left": x,"top": y});
+        $('.button_menu').show("slow");
+    }
+    $('.add').on('click', function() {
+	$('#Form_getFormInfsys').submit();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="left_menu">
+    <div class="left__menu">
+        <div class="menu_element">
+            <a href="/personal">
+                <img src="\img\user.png" width="52" height="56" alt="user">
+                <p>Личный кабинет</p>
+            </a>
+        </div>
+        <div class="menu_element">
+            <a href="/data">
+                <img src="\img\Data.png" width="73" height="54" alt="data">
+                <p>Ввод данных</p>
+            </a>
+        </div>
+        <div class="menu_element">
+            <a href="">
+                <img src="\img\Doc.png" width="61" height="63" alt="document">
+                <p>Документация</p>
+            </a>
+        </div>
+        <div class="menu_element exit">
+            <form  id="logout" th:action="@{/logout}" method="post"></form>
+            <img src="\img\logout.png" width="63" height="70" alt="exit" >
+            <p>Выход</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+$('.exit').on('click', function() {
+	$('#logout').submit();
+});
+</script>
+</div>
+<div th:fragment="back_button" class="back_history" onclick="window.history.go(-1)">
+    <img src="/img/back.png" width="60" height="48" alt="back">
+    <p>вернуться</p>
+</div>
+
+</body>
+</html>

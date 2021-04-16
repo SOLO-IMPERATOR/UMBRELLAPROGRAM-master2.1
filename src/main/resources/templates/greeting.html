@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Getting Started: Handing Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
+    <div class="container border border-dark rounded" style="position:fixed; bottom:3%; right:7%; background:white;max-width:330px;padding:15px;margin:0;font-size:0.88vw;z-index:1000;">
+        <div th:if="${operatorChange != null}">
+            <form method="POST" th:action="@{?OperatorChange}">
+                <p class="text-center">Оператор информационной системы</p>
+                <select name="operatorChange" class="custom-select"  onchange='this.form.submit()' required>
+                    <option th:value="${operatorChange.id}" th:text="${operatorChange.shortname}" selected></option>
+                    <option th:each ="num,S : ${listoperator}"    th:if="${num.id!=operatorChange.id}"  th:value="${num.id}" th:utext="${num.shortname}"></option>
+                </select>
+                <noscript><input name="submit" type="submit" value="submit" /></noscript>
+            </form>
+        </div>
+        <div  th:if="${infSystemChange != null}" style="margin-top:10px;">
+            <form method="POST" th:action="@{?InfSysChanger}">
+                <p class="text-center">Информационная система</p>
+                <select name="infSystemChange" class="custom-select"  onchange='this.form.submit()' required>
+                    <option selected   th:value="${infSystemChange.id}" th:utext="${infSystemChange.shortName}"></option>
+                    <option th:each ="num: ${listinfsystem}"    th:if="${num.operatorid  == operatorChange.id &&  num.id != infSystemChange.id}"  th:value="${num.id}" th:utext="${num.shortName}"></option>
+                </select>
+                <noscript><input name="submit" type="submit" value="submit" /></noscript>
+            </form>
+        </div>
+        <div th:if="${infSystemChange == null}">Информационная система для данного оператора не найдена<a href="http://127.0.0.1:8080/greeting?GetInformationSystem">Создать</a></div>
+    </div>
+
+
+
+<!--  ////////////////БЛОК ЛЕВОГО МЕНЮ///////////////     -->
+<div style="color:red;position:relative;background:#DC143C;top:0;left:0;width: 70px;height:100vh;float:left;" >
+  <a href="http://127.0.0.1:8080/writeDoc"><img th:src="@{\Image\Png\writePrinter.png}" alt="Printer" class="img_left"></a>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 border-right" style="padding:0">
+            <a style="width:100%"; class="a_main_button text-justify" href="?GetOperator">
+                <div class="container-fluid  border-bottom  rounded-right hover_change_div" >Оператор персональных <br> данных</div>
+            </a>
+            <a th:style="${operatorChange == null} ? 'color:gray;'" th:onclick="${operatorChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?GetOtvFace">
+                <div class="container-fluid  border-bottom  rounded-right hover_change_div">Ответственные должностные лица</div>
+            </a>
+            <a th:style="${operatorChange == null} ? 'color:gray;'" th:onclick="${operatorChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?GetInformationSystem">
+                <div  class="container-fluid  border-bottom  rounded-right hover_change_div">Информационная система</div>
+            </a>
+            <a  th:style="${infSystemChange == null} ? 'color:gray;'" th:onclick="${infSystemChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?getAct">
+                <div  class="container-fluid  border-bottom  rounded-right hover_change_div">Акт классификации</div>
+            </a>
+            <a th:style="${infSystemChange == null} ? 'color:gray;'" th:onclick="${infSystemChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?GetListPD">
+                <div  class="container-fluid  border-bottom  rounded-right hover_change_div">Перечень обрабатываемых персональных данных</div>
+            </a>
+            <a th:style="${infSystemChange == null} ? 'color:gray;'" th:onclick="${infSystemChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?GetPlace">
+                <div  class="container-fluid  border-bottom  rounded-right hover_change_div">Помещения обработки персональных данных</div>
+            </a>
+            <a th:style="${infSystemChange == null} ? 'color:gray;'" th:onclick="${infSystemChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?GetSotrudForPd">
+                <div  class="container-fluid  border-bottom  rounded-right hover_change_div">Сотрудники, имеющие доступ к персональным данным</div>
+            </a>
+            <a th:style="${infSystemChange == null} ? 'color:gray;'" th:onclick="${infSystemChange == null} ? 'return false;'"  style="width:100%"; class="a_main_button text-justify"  href="?write">
+                <div  class="container-fluid  border-bottom  rounded-right hover_change_div">Печать</div>
+            </a>
+
+
+        </div>
+        <!--  ////////////////БЛОК ЛЕВОГО МЕНЮ///////////////     -->
+
+        <!--  ////////////////БЛОК ОПЕРАТОРА ПЕРСОНАЛЬНЫХ ДАННЫХ///////////////     -->
+        <div th:if="${#httpServletRequest.getParameter('sendOperator') != null || #httpServletRequest.getParameter('GetOperator') != null || #httpServletRequest.getParameter('ChangeOperator') != null}" th:insert="OperatorPersData :: OperatorPersData" class="col-10" >
+        </div>
+        <!--  ////////////////БЛОК ОПЕРАТОРА ПЕРСОНАЛЬНЫХ ДАННЫХ///////////////     -->
+
+        <!--  ////////////////БЛОК ОТВЕТСВЕННЫХ ЛИЦ///////////////     -->
+        <div th:if="${#httpServletRequest.getParameter('ChangeOperatorOtv') != null ||#httpServletRequest.getParameter('GetOtvFace') != null || #httpServletRequest.getParameter('sendOtvFace') != null}"  class="col-10" >
+            <div th:insert="OtvFace :: OtvFace"></div>
+        </div>
+        <!--  ////////////////БЛОК ОТВЕТСВЕННЫХ ЛИЦ///////////////     -->
+
+        <!--  ////////////////БЛОК ИНФОРМАЦИОННАЯ СИСТЕМА///////////////     -->
+        <div th:if="${#httpServletRequest.getParameter('sendInfSystem') != null ||#httpServletRequest.getParameter('ChangeOperatorIS') != null || #httpServletRequest.getParameter('GetInformationSystem') != null}"  class="col-10">
+            <div th:insert="InfSys :: InfSys"></div>
+        </div>
+
+        <!--  ////////////////БЛОК АКТ КЛАССИФИКАЦИИ///////////////     -->
+        <div th:if="${#httpServletRequest.getParameter('sendAct') != null || #httpServletRequest.getParameter('changeActOperator') != null ||#httpServletRequest.getParameter('getAct') != null ||#httpServletRequest.getParameter('changeInfSystem') != null}"  class="col-10">
+            <div th:insert="ActClassification :: ActClassification"></div>
+        </div>
+        <!--  ////////////////БЛОК АКТ КЛАССИФИКАЦИИ///////////////     -->
+
+        <!--  ////////////////БЛОК ПЕЧАТЬ///////////////     -->
+         <div  class="col-10">
+            <div th:insert="write :: write"></div>
+        </div>
+        <!--  ////////////////БЛОК ПЕЧАТЬ///////////////     -->
+        <!--  ////////////////БЛОК МЕСТА ОБРАБОТКИ///////////////     -->
+        <div th:if="${#httpServletRequest.getParameter('GetPlace') != null}" class="col-10">
+            <div th:insert="getPlace :: getPlace"></div>
+        </div>
+        <!--  ////////////////БЛОК МЕСТА ОБРАБОТКИ///////////////     -->
+        <!--  ////////////////БЛОК ПЕЧАТЬ///////////////     -->
+        <!-- ////Блок перс данных////-->
+        <div th:if="${#httpServletRequest.getParameter('GetListPD') != null}"  class="col-10">
+            <div th:insert="listPD :: listPD"></div>
+        </div>
+        <!-- ////Блок перс данных////-->
+        <!-- ////Блок сотрудников перс данных////-->
+        <div th:if="${#httpServletRequest.getParameter('GetSotrudForPd') != null}" class="col-10">
+            <div th:insert="sotrudPD :: sotrudPD"></div>
+        </div>
+        <!-- ////Блок сотрудников перс данных////-->
+    </div>
+</div>
+</body>
+
+<script>
+$('#myModal').on('shown.bs.modal', function () {
+ $('#myInput').trigger('focus')
+})
+
+
+
+
+
+$('#blankCheckboxadd').on('click',function(){
+if(!$('#blankCheckboxadd').prop("checked")){
+$('#exampleFactAdOperatorAdd').prop('readonly', false);
+}else{
+$('#exampleFactAdOperatorAdd').val($("#exampleUradOperatorAdd").val())
+$('#exampleFactAdOperatorAdd').prop('readonly', true);
+}
+
+
+});
+
+
+
+
+
+$('#exampleUradOperatorAdd').on('input keyup', function(e) {
+  if($('#blankCheckboxadd').prop("checked")){
+$('#exampleFactAdOperatorAdd').val($("#exampleUradOperatorAdd").val())
+}
+});
+   $('button[name=clean]').on('click',function(){
+   $(this).closest('form').find('input')
+        .not(':button, :submit, :reset, :hidden')
+        .val('')
+        .removeAttr('selected');
+    return false;
+})
+
+
+
+function SendForm(){
+var inputText = $("#exampleChangeOperator").val();
+ $.ajax({
+  url : 'getCharNum',
+  type: 'GET',
+  dataType: 'json',
+  contentType: 'application/json',
+     mimeType: 'application/json',
+  data : ({
+   text: inputText
+  }),
+  success: function (data) {
+
+  }
+ });
+}
+</script>
+
+</body>
+</html>
