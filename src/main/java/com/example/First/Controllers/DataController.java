@@ -24,10 +24,9 @@ public class DataController {
         return "objectdata";
     }
 
-    @RequestMapping(value = "/data", params = "idoperat", method = RequestMethod.GET)
-    public String getOperatorOnId(Model model, @RequestParam int idoperat) {
+    @RequestMapping(value = "/data/{idoperat}", method = RequestMethod.GET)
+    public String getOperatorOnId(Model model, @PathVariable int idoperat) {
         model.addAttribute("operator",service.getOperatorOnId(idoperat));
-        model.addAttribute("operatorid",idoperat);
         return "setobjectdata";
     }
 

@@ -34,39 +34,64 @@
 			</form>
 		</div>
 		<div class="about__data">
-			<div class="form_operator" th:if="${operator != null}">
-				<div>
-					<label>Наименование оператора</label>
-                    <input class="form__input" name="name" th:value="${operator.name}" type="text" required disabled>
-				</div>
-                <div>
- 					<label>Сокращенное наименование оператора</label>
-                    <input class="form__input" name="shortname" th:value="${operator.shortname}" type="text" required disabled>
-                </div>
-                <div>
-                	<label>Инн оператора</label>
-                    <input class="form__input" name="inn" th:value="${operator.inn}" type="text" required disabled>
-                </div>
-                	
-                <div>
-                	<label>Кпп оператора</label>
-                    <input class="form__input" name="kpp" th:value="${operator.kpp}" type="text" required disabled>
-                </div>
-                <div>
-                	<label>Юридический адрес</label>
-                    <input class="form__input"  name="urad" th:value="${operator.urad}" type="text" required disabled>
-                </div>
-                <div>
-                	<label>Фактический адрес</label>
-                    <input class="form__input" name="factad" th:value="${operator.factad}" type="text" required disabled>
-                </div>
-                <div>
-                	 <label>Дата регистрации</label>
-                     <input class="form__input" name="date" type="date" th:value="${operator.date}" required disabled>
-                </div>    
+			<div class="card_form" >
+				<h1>Адрес</h1>
+				<form>
+					<div class="card_form__input">
+						<label>Регион:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Город:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Улица:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Дом:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Почтовый индекс:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__submit_add">
+						<input type="submit" name="" value="Добавить">
+					</div>
+				</form>
         	</div>
-        	<hr>
-        	<p class="text_support">Для изменения данных необходимо обратиться в службу технической поддержки...</p>
+        	<div class="card_form" >
+				<h1>Адрес</h1>
+				<form>
+					<div class="card_form__input">
+						<label>Регион:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Город:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Улица:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Дом:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__input">
+						<label>Почтовый индекс:</label>
+						<input type="text" name="">
+					</div>
+					<div class="card_form__submit_change">
+						<input class="change_delete" type="submit" name="" value="Удалить">
+						<input class="change_changer" type="submit" name="" value="Изменить">
+					</div>
+				</form>
+        	</div>
+    
 		</div>
 <style type="text/css">
 
@@ -141,6 +166,99 @@ select {
     scroll-behavior: auto !important;
   }
 }
+.about__data{
+		margin: 0 auto;
+		padding-top: 45px;
+			display: grid;
+        grid-template-columns: repeat(2, minmax(420px, 1fr));
+        max-width: 1000px;
+
+	}
+.card_form{
+width: 423px;
+height: 449px;
+background: #FFFFFF;
+border: 2px solid #000000;
+padding-top: 19px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 22px;
+}
+.card_form h1{
+	font-size: 21px;
+line-height: 25px;
+align-items: center;
+text-align: center;
+color: #000000;
+}
+.card_form__input{
+	width: 304px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.card_form__input label{
+	font-size: 15px;
+    line-height: 18px;
+
+    color: #9896A4;
+    float: left;
+    width: 100%;
+}
+.card_form__input input{
+	background: #FFFFFF;
+    border: 2px solid #828282;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+    height: 37px;font-size: 18px;
+line-height: 21px;
+}
+.card_form__submit_add{
+	width: 304px;
+    margin: 0 auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+.card_form__submit_change{
+	width: 304px;
+    margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.change_delete{
+	background: #F7786B !important;
+}
+.change_changer{
+	background: #A4BF6B !important;
+}
+.card_form__submit_change input{
+width: 148px;
+	height: 35px;
+	font-size: 18px;
+line-height: 21px;
+text-align: center;
+color: #FFFFFF;
+background: #95181F;
+border: none;
+border-radius: 5px;
+outline: none;
+
+}
+.card_form__submit_add input{
+	width: 148px;
+	height: 35px;
+	font-size: 18px;
+line-height: 21px;
+text-align: center;
+color: #FFFFFF;
+background: #95181F;
+border: none;
+border-radius: 5px;
+outline: none;
+}
+
 .text_support{
 font-size: 15px;
 font-weight: bold;
@@ -171,7 +289,7 @@ margin-top:49px;width: 650px;background: rgba(157, 156, 156, 0.4); height: 3px;b
 			max-width: 1150px;
 			margin: 0 auto;
 			display: grid;
-        grid-template-columns: repeat(3, minmax(420px, 1fr) );
+        grid-template-columns: repeat(2, minmax(420px, 1fr) );
 		}
 		.form_operator label{
 			font-style: normal;
@@ -206,15 +324,7 @@ margin-bottom: 4px;
 		margin-right: 230px;
 	}
 
-	.about__data{
-		margin-left: 125px;
-		padding-top: 45px;
-		display: flex;
-		    flex-direction: column;
-    justify-content: center;
-    align-items:center;
-
-	}
+	
 	.left__menu{
 		padding-top: 112px;
 		padding-bottom: 72px;
@@ -268,5 +378,6 @@ text-align: center;
 		width: 100%;
 	}
 </style>
+	</div>
 </body>
 </html>

@@ -17,6 +17,8 @@ public class InformationSystemAdress{
     private String City;
     private String Street;
     private String House;
+
+    private String mailindex;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "infsys_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -26,12 +28,13 @@ public class InformationSystemAdress{
     public InformationSystemAdress() {
     }
 
-    public InformationSystemAdress(Long id, String region, String city, String street, String house, InformationSystem informationSystem) {
+    public InformationSystemAdress(Long id, String region, String city, String street, String house,String mailindex, InformationSystem informationSystem) {
         this.id = id;
-        Region = region;
-        City = city;
-        Street = street;
-        House = house;
+        this.Region = region;
+        this.City = city;
+        this.Street = street;
+        this.House = house;
+        this.mailindex = mailindex;
         this.informationSystem = informationSystem;
     }
 
@@ -46,6 +49,7 @@ public class InformationSystemAdress{
     public String getRegion() {
         return Region;
     }
+
 
     public void setRegion(String region) {
         Region = region;
@@ -66,6 +70,14 @@ public class InformationSystemAdress{
     public void setStreet(String street) {
         Street = street;
     }
+    public String getMailindex() {
+        return mailindex;
+    }
+
+    public void setMailindex(String mailindex) {
+        this.mailindex = mailindex;
+    }
+
 
     public String getHouse() {
         return House;

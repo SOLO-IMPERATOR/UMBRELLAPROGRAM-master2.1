@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Адрес ИС</title>
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body><div th:insert="object_tools :: back_button"></div><!-- Подключаем меню !-->
+<div th:insert="object_tools :: left_menu"></div><!-- Подключаем меню !-->
+<div class="object__data">
+    <div class="upper__all">
+        <div><h1 style="">Расположение ИС</h1></div>
+    </div>
+<div class="card_wrapper">
+    <div th:if="${listinfsysadres != null}" th:each="num: ${listinfsysadres}"class="card_form" >
+        <h1>Адрес</h1>
+        <form th:action="@{__${#httpServletRequest.requestURI}__/?changeAdresIs}" method="post">
+            <div class="card_form__input">
+                <label>Регион:</label>
+                <input type="hidden" name="id" th:value="${num.id}">
+                <input type="hidden" name="informationSystem" th:value="${num.informationSystem.id}">
+                <input type="text" th:value="${num.region}" name="region">
+            </div>
+            <div class="card_form__input">
+                <label>Город:</label>
+                <input type="text" th:value="${num.city}" name="city">
+            </div>
+            <div class="card_form__input">
+                <label>Улица:</label>
+                <input type="text" th:value="${num.street}" name="street">
+            </div>
+            <div class="card_form__input">
+                <label>Дом:</label>
+                <input type="text" th:value="${num.house}" name="house">
+            </div>
+            <div class="card_form__input">
+                <label>Почтовый индекс:</label>
+                <input type="text" th:value="${num.mailindex}" name="mailindex">
+            </div>
+            <div class="card_form__submit_change">
+                <input th:formaction="@{__${#httpServletRequest.requestURI}__/?deleteAdresIs}" class="change_delete" type="submit" name="delete" value="Удалить">
+                <input class="change_changer" type="submit" name="change" value="Изменить">
+            </div>
+        </form>
+    </div>
+    <div class="card_form">
+        <h1>Адрес</h1>
+        <form th:action="@{__${#httpServletRequest.requestURI}__/?addAdresIs}" th:object="${informationSystem}" method="post">
+            <div class="card_form__input">
+                <label>Регион:</label>
+
+                <input type="text" name="region">
+            </div>
+            <div class="card_form__input">
+                <label>Город:</label>
+                <input type="text" name="city">
+            </div>
+            <div class="card_form__input">
+                <label>Улица:</label>
+                <input type="text" name="street">
+            </div>
+            <div class="card_form__input">
+                <label>Дом:</label>
+                <input type="text" name="house">
+            </div>
+            <div class="card_form__input">
+                <label>Почтовый индекс:</label>
+                <input type="text" name="mailindex">
+            </div>
+            <div class="card_form__submit_add">
+                <input type="submit" name="addAdresIs" value="Добавить">
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</body>
+</html>

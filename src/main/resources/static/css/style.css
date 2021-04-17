@@ -300,6 +300,28 @@ font-size: 28px;
 font-family: Geneva, Arial, Helvetica, sans-serif;
 color: #FFFFFF;
 }
+
+.button__data_IS{
+	border: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        width: 357px;
+        margin-bottom: 50px;
+        height: 141px;
+        margin-right: 50px;
+        background: #95181F;
+        border-radius: 16px;
+        white-space: pre-wrap;
+        text-align: center;
+        font-weight: 500;
+        font-size: 28px;
+        font-family: Geneva, Arial, Helvetica, sans-serif;
+        color: #FFFFFF;
+        outline: none;
+}
+.button__data_IS:nth-child(3n) {
+                      margin-right: 0;
+}
 .add{
 	background: #C4C4C4;
 	padding-top: 37px !important;
@@ -478,3 +500,98 @@ border: none;
 .select_obj_button:hover{
        color: #FFFFFF;
     }
+/* adres inf system*/
+.card_wrapper{
+		margin: 0 auto;
+			display: grid;
+        grid-template-columns: repeat(2, minmax(390px, 1fr));
+        max-width: 1000px;
+
+	}
+.card_form{
+width: 390px;
+height: 449px;
+background: #FFFFFF;
+border: 2px solid #000000;
+padding-top: 19px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+border-radius: 22px;
+margin-right: 50px;
+}
+.card_form h1{
+	font-size: 21px;
+line-height: 25px;
+align-items: center;
+text-align: center;
+color: #000000;
+}
+.card_form__input{
+	width: 304px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+.card_form__input label{
+	font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    margin-bottom: 3px;
+    color: #9896A4;
+    float: left;
+    width: 100%;
+}
+.card_form__input input{
+	background: #FFFFFF;
+    border: 2px solid #828282;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+    height: 37px;font-size: 18px;
+line-height: 21px;
+}
+.card_form__submit_add{
+	width: 304px;
+    margin: 0 auto;
+	display: flex;
+	justify-content: flex-end;
+	align-items: flex-end;
+}
+.card_form__submit_change{
+	width: 304px;
+    margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.change_delete{
+	background: #F7786B !important;
+}
+.change_changer{
+	background: #A4BF6B !important;
+}
+.card_form__submit_change input{
+width: 148px;
+	height: 35px;
+	font-size: 18px;
+line-height: 21px;
+text-align: center;
+color: #FFFFFF;
+background: #95181F;
+border: none;
+border-radius: 5px;
+outline: none;
+
+}
+.card_form__submit_add input{
+	width: 148px;
+	height: 35px;
+	font-size: 18px;
+line-height: 21px;
+text-align: center;
+color: #FFFFFF;
+background: #95181F;
+border: none;
+border-radius: 5px;
+outline: none;
+}
+/*///////////////////////*/
