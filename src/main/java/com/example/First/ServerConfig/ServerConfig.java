@@ -6,9 +6,13 @@ import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.unit.DataSize;
+
+import javax.servlet.MultipartConfigElement;
 
 @Configuration
 public class ServerConfig {
@@ -28,6 +32,13 @@ public class ServerConfig {
         };
         tomcat.addAdditionalTomcatConnectors(getHttpConnector());
         return tomcat;
+    }
+    @Bean
+    MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize(DataSize.parse("2048KB"));
+        factory.setMaxRequestSize(DataSize.parse("2048KB"));
+        return factory.createMultipartConfig();
     }
 
     private Connector getHttpConnector() {

@@ -17,51 +17,51 @@
         <div class="upper__all">
             <div><h1 style="">Информационная система</h1></div>
         </div>
-        <div class="form_operator" th:if="${infsystem != null}" th:each="num: ${infsystem}">
+        <div class="form_operator" th:if="${infsystem != null}">
             <div>
                 <label>Наименование информационной системы</label>
-                <input class="form__input" name="fullName" type="text" th:value="${num.fullName}" required readonly>
+                <input class="form__input" name="fullName" type="text" th:value="${infsystem.fullName}" required readonly>
             </div>
             <div>
                 <label>Сокращенное наименование</label>
-                <input class="form__input" name="shortName"  type="text" th:value="${num.shortName}" required readonly>
+                <input class="form__input" name="shortName"  type="text" th:value="${infsystem.shortName}" required readonly>
             </div>
             <div>
                 <label>Дата ввода в эксплуатацию</label>
-                <input class="form__input" name="date" type="date" th:value="${num.date}" required readonly>
+                <input class="form__input" name="date" type="date" th:value="${infsystem.date}" required readonly>
             </div>
             <div class="text_infsys_h5"><h5>Состав информационной системы</h5></div><div></div><div></div>
             <div>
                 <label>Рабочие станции</label>
-                <input name="countWorkStation"  type="text"  th:value="${num.countWorkStation}" class="form__input" required readonly>
+                <input name="countWorkStation"  type="text"  th:value="${infsystem.countWorkStation}" class="form__input" required readonly>
             </div>
             <div>
                 <label>Ноутбуки</label>
-                <input class="form__input"  name="countLaptop"  type="text" th:value="${num.countLaptop}" required readonly>
+                <input class="form__input"  name="countLaptop"  type="text" th:value="${infsystem.countLaptop}" required readonly>
             </div>
             <div>
                 <label>Моноблоки</label>
-                <input class="form__input" name="countMonoblock" th:value="${num.countMonoblock}" type="text" required readonly>
+                <input class="form__input" name="countMonoblock" th:value="${infsystem.countMonoblock}" type="text" required readonly>
             </div>
             <div>
                 <label>Планшеты</label>
-                <input class="form__input" type="text" name="countTablet"   th:value="${num.countTablet}" required readonly>
+                <input class="form__input" type="text" name="countTablet"   th:value="${infsystem.countTablet}" required readonly>
             </div>
             <div>
                 <label>Физические серверы</label>
-                <input class="form__input" type="text" name="countPhysicalServer" th:value="${num.countPhysicalServer}" required readonly>
+                <input class="form__input" type="text" name="countPhysicalServer" th:value="${infsystem.countPhysicalServer}" required readonly>
             </div>
             <div>
                 <label>Хосты виртуализации</label>
-                <input class="form__input" type="text" name="countHostVirtualization" th:value="${num.countHostVirtualization}" required readonly>
+                <input class="form__input" type="text" name="countHostVirtualization" th:value="${infsystem.countHostVirtualization}" required readonly>
             </div>
             <div>
                 <label>Виртуальные серверы</label>
-                <input class="form__input" type="text" name="countVirtualServer" th:value="${num.countVirtualServer}"  required readonly>
+                <input class="form__input" type="text" name="countVirtualServer" th:value="${infsystem.countVirtualServer}"  required readonly>
             </div>
             <div>
                 <label>Системы хранения данных</label>
-                <input class="form__input" type="text" th:value="${num.countSystemSaveData}" name="countSystemSaveData"  required readonly>
+                <input class="form__input" type="text" th:value="${infsystem.countSystemSaveData}" name="countSystemSaveData"  required readonly>
             </div>
 
         </div>

@@ -11,11 +11,11 @@ import java.sql.Blob;
 @Entity
 public class PlaceProccesingData{
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String place;
     private int floor;
-    private Blob image;
+    private String image;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "infsysadres_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -25,7 +25,7 @@ public class PlaceProccesingData{
     public PlaceProccesingData() {
     }
 
-    public PlaceProccesingData(Long id, String place, int floor, Blob image, InformationSystemAdress informationSystemAdress) {
+    public PlaceProccesingData(Long id, String place, int floor, String image, InformationSystemAdress informationSystemAdress) {
         this.id = id;
         this.place = place;
         this.floor = floor;
@@ -57,11 +57,11 @@ public class PlaceProccesingData{
         this.floor = floor;
     }
 
-    public Blob getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

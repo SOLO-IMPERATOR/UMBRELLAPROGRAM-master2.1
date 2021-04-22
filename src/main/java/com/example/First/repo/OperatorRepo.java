@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface OperatorRepo extends CrudRepository<OperatorPersData,Long> {
     List<OperatorPersData> findByUser(USER user);
-    List<OperatorPersData> findByIdAndUser(Long id,USER user);
+    OperatorPersData findByIdAndUser(Long id,USER user);
 
 }

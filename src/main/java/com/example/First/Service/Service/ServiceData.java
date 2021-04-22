@@ -30,7 +30,7 @@ public class ServiceData {
         operatorRepo.save(operatorPersData);
         return operatorPersData;
     }
-    public List<OperatorPersData> getOperatorOnId(int id){
+    public OperatorPersData getOperatorOnId(int id){
         return  operatorRepo.findByIdAndUser((long)id, serviceUser.getUser());
     }
     /* public OperatorPersData replaceOperator(OperatorPersData operatorPersData){

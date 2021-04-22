@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface InformationSystemRepo extends CrudRepository<InformationSystem,Long> {
     List<InformationSystem> findByOperator(OperatorPersData operator);
-    List<InformationSystem> findByIdAndOperator(Long id,OperatorPersData operator);
+    InformationSystem findByIdAndOperator(Long id,OperatorPersData operator);
 }

@@ -24,20 +24,27 @@ public class ServiceInfSysAdres {
     private ServiceUser serviceUser;
     public void addInfSysAdresForIS(int infsysId, InformationSystemAdress infad,int operatorId) {
         infad.setId(new InformationSystemAdress().getId());
-        infad.setInformationSystem(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()).get(0)).get(0));
+        infad.setInformationSystem(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser())));
         informationSystemAdresRepo.save(infad);
     }
     public void changeInfSysAdresForIS(int infsysId,InformationSystemAdress infad,int operatorId) {
-        if(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()).get(0)).get(0)!=null) {
+        if(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()))!=null) {
             informationSystemAdresRepo.save(infad);
         }
     }
     public void deleteInfSysAdresForIS(int infsysId,InformationSystemAdress infad,int operatorId) {
-        if(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()).get(0)).get(0)!=null) {
+        if(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()))!=null) {
             informationSystemAdresRepo.delete(infad);
         }
     }
+    public boolean haveInfSysAdresForIS(int infsysId,int operatorId) {
+        if(informationSystemAdresRepo.findByInformationSystem(informationSystemRepo.findByIdAndOperator((long) infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()))).size()>0) {
+            return true;
+        }
+        return false;
+    }
+
     public List<InformationSystemAdress> getinfSysAdresFromIS(int infsysId,int operatorId) {
-        return informationSystemAdresRepo.findByInformationSystem(informationSystemRepo.findByIdAndOperator((long)infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser()).get(0)).get(0));
+        return informationSystemAdresRepo.findByInformationSystem(informationSystemRepo.findByIdAndOperator((long)infsysId,operator.findByIdAndUser((long) operatorId,serviceUser.getUser())));
     }
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Адрес ИС</title>
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="object_tools :: back_button"></div><!-- Подключаем меню !-->
+<div th:insert="object_tools :: left_menu"></div><!-- Подключаем меню !-->
+<div class="object__data">
+    <div class="upper__all">
+        <div><h1 style="">Места обработки данных</h1></div>
+    </div>
+    <div class="card_wrapper">
+        <div th:if="${Place != null}"  th:each="num: ${Place}" class="card_form" >
+            <h1>Помещение</h1>
+            <form th:action="@{__${#httpServletRequest.requestURI}__/?changePlace}" method="post"  enctype="multipart/form-data">
+                <div class="card_form__input">
+                    <label>Номер(название) помещение:</label>
+                    <input type="hidden" name="id" th:value="${num.id}">
+                    <input type="text" name="place" th:value="${num.place}">
+                </div>
+                <div class="card_form__input">
+                    <label>Этаж:</label>
+                    <input type="text" name="floor" th:value="${num.floor}" >
+                </div>
+                <div class="card_form__input file" >
+                    <label>Схема помещения(необязательно)</label>
+                    <input name="imgpath" type="hidden" th:value="${num.image}">
+                    <input name="file" type="file"   class="file">
+                </div>
+                <div class="card_form__input">
+                    <label>Адрес местонахождения:</label>
+                    <div class="select_input_div">
+                        <select name="informationSystemAdress" class="select_input_all">
+                            <option  th:each="num: ${AdresesIs}" th:text="${num.region +', '+ num.city+', '+num.street+', '+num.house}" th:value="${num.id}" selected></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card_form__submit_change">
+                    <input th:formaction="@{__${#httpServletRequest.requestURI}__/?deletePlace}" class="change_delete" type="submit" name="deletePlace" value="Удалить">
+                    <input  class="change_changer" type="submit" name="changePlace" value="Изменить">
+                </div>
+            </form>
+        </div>
+
+        <div class="card_form" >
+            <h1>Помещение</h1>
+            <form th:action="@{#httpServletRequest.requestURI}" method="post" th:object="${place}" enctype="multipart/form-data">
+                <div class="card_form__input">
+                    <label>Номер(название) помещение:</label>
+                    <input type="text" name="place">
+                </div>
+                <div class="card_form__input">
+                    <label>Этаж:</label>
+                    <input type="text" name="floor">
+                </div>
+                <div class="card_form__input file">
+                    <label>Схема помещения(необязательно)</label>
+                    <input name="file" type="file"  class="file">
+                </div>
+                <div class="card_form__input">
+                    <label>Адрес местонахождения:</label>
+                    <div class="select_input_div">
+                        <select name="informationSystemAdress" class="select_input_all">
+                            <option  th:each="num: ${AdresesIs}" th:text="${num.street}" th:value="${num.id}" selected></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card_form__submit_add">
+                    <input type="submit" name="addPlace" value="Добавить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

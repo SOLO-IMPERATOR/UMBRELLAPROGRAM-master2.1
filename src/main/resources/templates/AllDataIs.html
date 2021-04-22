@@ -20,10 +20,20 @@
         </div>
         <div class="wrapper_button__data">
             <form th:action="@{__${#httpServletRequest.requestURI}__/AdresIs?getAdresIs}" method="GET">
-                <input class="button__data_IS"  type="submit" name="getAdresIs" value="Адрес инфомационной системы">
+                <input class="buttonDataIS"  type="submit" name="getAdresIs" value="Адрес инфомационной системы">
+            </form>
+            <form th:action="@{__${#httpServletRequest.requestURI}__/Place?getPlace}" method="GET">
+                <input  th:attr="class=${haveAdresIs ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!haveAdresIs}" type="submit" name="getPlace" value="Места обработки данных">
+            </form>
+            <form th:action="@{__${#httpServletRequest.requestURI}__/WorkStation?getWorkStation}" method="GET">
+                <input  th:attr="class=${havePlace ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!havePlace}" type="submit" name="getWorkStation" value="Рабочие станции">
             </form>
         </div>
     </div>
 </div>
+<script>
+    $('#btn-tooltip').tooltip();
+</script>
+
 </body>
 </html>

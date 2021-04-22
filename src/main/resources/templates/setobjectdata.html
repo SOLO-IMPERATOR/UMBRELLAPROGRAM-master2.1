@@ -17,35 +17,35 @@
         <div class="upper__all">
             <div><h1 style="">Оператор персональных данных</h1></div>
         </div>
-        <div class="form_operator" th:if="${operator != null}" th:each="num: ${operator}">
+        <div class="form_operator" th:if="${operator != null}" >
             <div>
                 <label>Наименование оператора</label>
-                <input class="form__input" name="name" th:value="${num.name}" type="text" required readonly>
+                <input class="form__input" name="name" th:value="${operator.name}" type="text" required readonly>
             </div>
             <div>
                 <label>Сокращенное наименование оператора</label>
-                <input class="form__input" name="shortname" th:value="${num.shortname}" type="text" required readonly>
+                <input class="form__input" name="shortname" th:value="${operator.shortname}" type="text" required readonly>
             </div>
             <div>
                 <label>Инн оператора</label>
-                <input class="form__input" name="inn" th:value="${num.inn}" type="text" required readonly>
+                <input class="form__input" name="inn" th:value="${operator.inn}" type="text" required readonly>
             </div>
 
             <div>
                 <label>Кпп оператора</label>
-                <input class="form__input" name="kpp" th:value="${num.kpp}" type="text" required readonly>
+                <input class="form__input" name="kpp" th:value="${operator.kpp}" type="text" required readonly>
             </div>
             <div>
                 <label>Юридический адрес</label>
-                <input class="form__input"  name="urad" th:value="${num.urad}" type="text" required readonly>
+                <input class="form__input"  name="urad" th:value="${operator.urad}" type="text" required readonly>
             </div>
             <div>
                 <label>Фактический адрес</label>
-                <input class="form__input" name="factad" th:value="${num.factad}" type="text" required readonly>
+                <input class="form__input" name="factad" th:value="${operator.factad}" type="text" required readonly>
             </div>
             <div>
                 <label>Дата регистрации</label>
-                <input class="form__input" name="date" type="date" th:value="${num.date}" required readonly>
+                <input class="form__input" name="date" type="date" th:value="${operator.date}" required readonly>
             </div>
         </div>
 

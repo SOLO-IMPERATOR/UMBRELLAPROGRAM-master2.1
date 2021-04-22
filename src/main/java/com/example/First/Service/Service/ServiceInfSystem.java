@@ -17,14 +17,14 @@ public class ServiceInfSystem {
     @Autowired
     OperatorRepo operatorRepo;
     public List<InformationSystem> getInfSysFromOperator(int operatorid) {
-      return informationSystemRepo.findByOperator(operatorRepo.findByIdAndUser((long)operatorid,serviceUser.getUser()).get(0));
+      return informationSystemRepo.findByOperator(operatorRepo.findByIdAndUser((long)operatorid,serviceUser.getUser()));
     }
     public void addNewInfSystem(InformationSystem informationSystem){
         informationSystem.setId(new InformationSystem().getId());
         informationSystemRepo.save(informationSystem);
     }
- public List<InformationSystem> getOperatorOnId(int id,int operatorid){
-        return informationSystemRepo.findByIdAndOperator((long)id,operatorRepo.findByIdAndUser((long)operatorid,serviceUser.getUser()).get(0));
+ public InformationSystem getOperatorOnId(int id,int operatorid){
+        return informationSystemRepo.findByIdAndOperator((long)id,operatorRepo.findByIdAndUser((long)operatorid,serviceUser.getUser()));
     }
      /*  public void addNewInfSystem(InformationSystem informationSystem){
         informationSystem.setId(new InformationSystem().getId());
