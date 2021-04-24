@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface WorkStationRepo extends CrudRepository<WorkStation,Long> {
     List<WorkStation> findByplaceProccesingData(PlaceProccesingData placeProccesingData);
+    WorkStation findById(long id);
 }

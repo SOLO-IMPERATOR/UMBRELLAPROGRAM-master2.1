@@ -16,44 +16,64 @@
     <div class="upper__all">
         <div><h1 style="">Рабочие станции</h1></div>
     </div>
-    <div class="card_wrapper">
-      <!--  <div th:if="${Place != null}"  th:each="num: ${Place}" class="card_form" >
-            <h1>Помещение</h1>
-            <form th:action="@{__${#httpServletRequest.requestURI}__/?changePlace}" method="post"  enctype="multipart/form-data">
-                <div class="card_form__input">
-                    <label>Номер(название) помещение:</label>
-                    <input type="hidden" name="id" th:value="${num.id}">
-                    <input type="text" name="place" th:value="${num.place}">
+    <div style="max-width: 1500px;
+    min-width: 1400px;" class="card_wrapper">
+     <div  th:if="${workstations != null}" th:each="num : ${workstations}" style="width:686px;" class="card_form" >
+        <h1>Рабочая станция</h1>
+        <form th:action="@{#httpServletRequest.requestURI}" method="post">
+            <input name="idworkstation" th:value="${num.workStation.id}" type="hidden">
+          <div style="position: relative;" th:attr="class='select_input '+${num.workStation.id}">
+              <div th:each="device : ${num.externaldevice}" class='workstation_input' th:attr="id='blck'+${num.workStation.id}+'_'+${device.id}">
+                <div class='card_form__input'>
+                    <input type="hidden" name="deviceid" th:value="${device.id}">
+                    <input type='hidden' name='typeextuse' th:value="${device.name}">
+                    <label th:text="'Модель '+${device.name}"></label>
+                    <input th:value="${device.model}" name='modelnumuse' type='text'>
+                  </div>
+                <div class='card_form__input'>
+                      <label th:text="'Серийный номер '+${device.name}"></label>
+                      <input th:value="${device.serialNumber}" name='serialnumuse' type='text'>
                 </div>
-                <div class="card_form__input">
-                    <label>Этаж:</label>
-                    <input type="text" name="floor" th:value="${num.floor}" >
-                </div>
-                <div class="card_form__input file" >
-                    <label>Схема помещения(необязательно)</label>
-                    <input name="imgpath" type="hidden" th:value="${num.image}">
-                    <input name="file" type="file"   class="file">
-                </div>
-                <div class="card_form__input">
-                    <label>Адрес местонахождения:</label>
-                    <div class="select_input_div">
-                        <select name="informationSystemAdress" class="select_input_all">
-                            <option  th:each="num: ${AdresesIs}" th:text="${num.region +', '+ num.city+', '+num.street+', '+num.house}" th:value="${num.id}" selected></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="card_form__submit_change">
-                    <input th:formaction="@{__${#httpServletRequest.requestURI}__/?deletePlace}" class="change_delete" type="submit" name="deletePlace" value="Удалить">
-                    <input  class="change_changer" type="submit" name="changePlace" value="Изменить">
-                </div>
-            </form>
-        </div>
-!-->
-        <div style="width:686px;" th:each="num : ${countworkstation}" class="card_form" >
+                  <div th:onclick="'delalreadyselect('+${num.workStation.id}+','+${device.id}+')'" class='del_select'>
+                 <span>X</span>
+                  </div>
+              </div>
+          </div>
+            <div style="margin: 0 auto;width: 50%;" class="select_input_div">
+                <label>Добавить устройство</label>
+                <select id="select_u" th:onchange="'selectchange(this.value,this,'+${num.workStation.id}+')'" class="select_input_all">
+                    <option value="0">Добавить</option>
+                    <option value="1">Системный блок</option>
+                    <option value="2">Клавиатура</option>
+                    <option value="3">Компьютерная мышь</option>
+                    <option value="4">Источник бесперебойного питания</option>
+                    <option value="5">Принтер</option>
+                    <option value="6">Сканер</option>
+                    <option value="7">Монитор</option>
+                    <option value="8">Колонка</option>
+                </select>
+            </div>
+            <div style="margin: 0 auto;width: 50%;" class="select_input_div">
+                <label>Помещение</label>
+                <select name="placeProccesingData" class="select_input_all">
+                    <option  th:each="place: ${places}" th:text="${'Помещение '+place.place +', Этаж '+ place.floor}" th:value="${place.id}"   th:selected="(${place.id} == ${num.workStation.placeProccesingData.id})" ></option>
+                </select>
+            </div>
+            <div style="margin-top:15px;"></div>
+            <div class="card_form__submit_change">
+                    <input th:formaction="@{__${#httpServletRequest.requestURI}__/?deleteWS}" class="change_delete" type="submit" name="deleteWS" value="Удалить">
+                    <input  class="change_changer" type="submit" name="changeWS" value="Изменить">
+            </div>
+        </form>
+
+    </div>
+        <div style="width:686px;" class="card_form" >
             <h1>Рабочая станция</h1>
-            <form th:action="@{#httpServletRequest.requestURI}" method="post" th:object="${workstation}">
-                <div  class="select_input_div">
-                    <select  name="informationSystemAdress" class="select_input_all">
+            <form th:action="@{#httpServletRequest.requestURI}" method="post">
+                <div  style="position: relative;" class="select_input 0"></div>
+                <div style="margin: 0 auto;width: 50%;" class="select_input_div">
+                    <label>Добавить устройство</label>
+                    <select id="select_u 0" onchange="selectchange(this.value,this,0)" class="select_input_all">
                         <option value="0">Добавить</option>
                         <option value="1">Системный блок</option>
                         <option value="2">Клавиатура</option>
@@ -65,16 +85,29 @@
                         <option value="8">Колонка</option>
                     </select>
                 </div>
-            </form>
+                <div style="margin: 0 auto;width: 50%;" class="select_input_div">
+                    <label>Помещение</label>
+                    <select name="placeProccesingData" class="select_input_all">
+                        <option  th:each="place: ${places}" th:text="${'Помещение '+place.place +', Этаж '+ place.floor}" th:value="${place.id}"  ></option>
+                    </select>
+                </div>
+                <div style="width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;margin-top:15px;">
+                    <input class="button_submit" type="submit" name="addWS" value="Добавить">
+                </div>
+        </form>
         </div>
     </div>
 </div>
 <script>
-$('select').on('change', function()
+var count=0;
+function selectchange(val,select,id)
 {
-let val = this.value;
-var txtmodel= "";
+select.selectedIndex=0;
 
+var txtmodel= "";
 var hidden ="";
         if(val!=0){
             switch(val){
@@ -124,10 +157,20 @@ var hidden ="";
          }
 
 
-            $(".select_input_div").prepend("<div class='workstation_input'><div></div><div class='card_form__input'><label>Модель "+ txtmodel+"</label><input type='text'></div><div class='card_form__input'><label>Серийный номер "+txtmodel+"</label><input type='text'></div></div>");
+            $("."+id).prepend("<div class='workstation_input' id=blck"+val+"_"+id+"_"+count+"><div></div><div class='card_form__input'><input type='hidden' name='typeext' value='"+hidden+"'><label>Модель "+ txtmodel+"</label><input  name='modelnum' type='text'></div><div class='card_form__input'><label>Серийный номер "+txtmodel+"</label><input name='serialnum' type='text'></div><div onclick=' delselect("+val+","+id+","+count+")' class='del_select'> <span>X</span></div></div>");
+            count++;
         }
 
- });
+ };
+ function delselect(val,id,count)
+{
+    $("#blck"+val+"_"+id+"_"+count).remove();
+    count--;
+};
+ function delalreadyselect(val,id)
+{
+    $("#blck"+val+"_"+id).remove();
+};
 
 
 

@@ -32,7 +32,7 @@ public class PlaceProccesingDataController {
 
     @RequestMapping(value = "data/{idoperatorForis}/IS/{infsysId}/Place", params="addPlace", method = RequestMethod.POST)
     public String addPlace(Model model, @PathVariable int idoperatorForis, @PathVariable int infsysId, @ModelAttribute PlaceProccesingData place, @RequestParam ("file") MultipartFile file) throws IOException {
-        servicePostProcessingData.addPlaceFromAdresIs(place,file);
+        servicePostProcessingData.addPlaceFromAdresIs(place,file,infsysId,idoperatorForis);
         return "redirect:/data/"+idoperatorForis+"/IS/"+infsysId+"/Place?getPlace";
     }
     @RequestMapping(value = "data/{idoperatorForis}/IS/{infsysId}/Place", params="changePlace", method = RequestMethod.POST)

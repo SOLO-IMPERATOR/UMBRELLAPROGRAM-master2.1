@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 public class WorkStation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "placeProccesing_id", nullable = false)

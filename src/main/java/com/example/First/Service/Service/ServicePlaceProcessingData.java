@@ -3,6 +3,7 @@ package com.example.First.Service.Service;
 
 import com.example.First.ClassEntity.InformationSystemAdress;
 import com.example.First.ClassEntity.PlaceProccesingData;
+import com.example.First.ClassEntity.WorkStation;
 import com.example.First.repo.InformationSystemAdresRepo;
 import com.example.First.repo.InformationSystemRepo;
 import com.example.First.repo.OperatorRepo;
@@ -36,6 +37,8 @@ public class ServicePlaceProcessingData {
     private PlaceProcessingDataRepo placeProcessingDataRepo;
     @Autowired
     private ServiceInfSysAdres serviceInfSysAdres;
+    @Autowired
+    private ServiceWorkStation serviceWorkStation;
     @Value("${upload.path}")
     private String uploadPath;
     public List<PlaceProccesingData> getPlaceFromAdresIs(int infsysid,int idoperator){
@@ -48,7 +51,7 @@ public class ServicePlaceProcessingData {
         }
         return result;
     }
-    public void addPlaceFromAdresIs (PlaceProccesingData placeProcessingData, MultipartFile mp) throws IOException {
+    public void addPlaceFromAdresIs (PlaceProccesingData placeProcessingData, MultipartFile mp,int infsysid,int operatorid) throws IOException {
         if(mp!=null){
             File uploadFile = new File(uploadPath+"/place/users/"+serviceUser.getUser().getId()+"/");
             if(!uploadFile.exists()){
@@ -57,10 +60,11 @@ public class ServicePlaceProcessingData {
             String uuidFile = UUID.randomUUID().toString();
             String finalfilename = uuidFile+"."+mp.getOriginalFilename();
             mp.transferTo(new File(uploadPath+"/place/users/"+serviceUser.getUser().getId()+"/"+finalfilename));
-            placeProcessingData.setId(new PlaceProccesingData().getId());
             placeProcessingData.setImage(uploadPath+"/place/users/"+serviceUser.getUser().getId()+"/"+finalfilename);
-            placeProcessingDataRepo.save(placeProcessingData);
         }
+            placeProcessingData.setId(new PlaceProccesingData().getId());
+            placeProcessingDataRepo.save(placeProcessingData);
+
     }
     public void changePlaceFromAdresIs(PlaceProccesingData placeProcessingData, MultipartFile mp,String path) throws IOException {
        PlaceProccesingData tmp = placeProcessingDataRepo.findById(placeProcessingData.getId()).get();

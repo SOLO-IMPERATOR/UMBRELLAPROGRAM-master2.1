@@ -23,6 +23,9 @@ public class ServiceInfSystem {
         informationSystem.setId(new InformationSystem().getId());
         informationSystemRepo.save(informationSystem);
     }
+    public void changeInfSystem(InformationSystem informationSystem){
+        informationSystemRepo.save(informationSystem);
+    }
  public InformationSystem getOperatorOnId(int id,int operatorid){
         return informationSystemRepo.findByIdAndOperator((long)id,operatorRepo.findByIdAndUser((long)operatorid,serviceUser.getUser()));
     }
