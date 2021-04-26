@@ -28,6 +28,12 @@
             <form th:action="@{__${#httpServletRequest.requestURI}__/WorkStation?getWorkStation}" method="GET">
                 <input  th:attr="class=${havePlace ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!havePlace}" type="submit" name="getWorkStation" value="Рабочие станции">
             </form>
+            <form th:action="@{__${#httpServletRequest.requestURI}__/ServerRack?getRack}" method="GET">
+                <input  th:attr="class=${havePlace ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!havePlace}" type="submit" name="getRack" value="Серверные стойки">
+            </form>
+            <form th:action="@{__${#httpServletRequest.requestURI}__/ServerDevices?getDevices}" method="GET">
+                <input  th:attr="class=${haveServerRack ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!haveServerRack}" type="submit" name="getDevices" value="Оборудование в стойках">
+            </form>
         </div>
     </div>
 </div>
