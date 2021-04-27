@@ -34,6 +34,9 @@
             <form th:action="@{__${#httpServletRequest.requestURI}__/ServerDevices?getDevices}" method="GET">
                 <input  th:attr="class=${haveServerRack ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!haveServerRack}" type="submit" name="getDevices" value="Оборудование в стойках">
             </form>
+            <form th:action="@{__${#httpServletRequest.requestURI}__/HostVirtual?getHosts}" method="GET">
+                <input  th:attr="class=${haveServerRack ? 'buttonDataIS' : 'buttonDataIS disable'}" th:disabled="${!haveServerRack}" type="submit" name="getHosts" value="Хосты виртуализации">
+            </form>
         </div>
     </div>
 </div>

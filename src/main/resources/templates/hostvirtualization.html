@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Серверные стойки</title>
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="object_tools :: back_button"></div><!-- Подключаем меню !-->
+<div th:insert="object_tools :: left_menu"></div><!-- Подключаем меню !-->
+<div class="object__data">
+    <div class="upper__all">
+        <div><h1 style="">Хосты виртуализации</h1></div>
+    </div>
+    <div class="card_wrapper">
+        <div th:if="${hostsvirt != null}" th:each="num : ${hostsvirt}" class="card_form" >
+            <h1>Хост виртуализации</h1>
+            <form th:action="@{#httpServletRequest.requestURI}" method="post" th:object="${hostVirtualization}">
+                <div class="card_form__input">
+                    <input type="hidden" th:value="${num.id}" name="id">
+                    <input type="hidden" th:value="${num.informationSystem.id}" name="informationSystem">
+                    <label>Имя хоста:</label>
+                    <input type="text" th:value="${num.netname}" name="netname">
+                </div>
+                <div class="card_form__input">
+                    <label>Сервер:</label>
+                    <div class="card_form__input">
+                        <input type="text" th:each="srv: ${num.servers}"  th:value="${srv.typedevice +' '+srv.beginunit+' - '+srv.endunit+', Стойка ' +srv.serverRack.number}" readonly>
+                        <input type="hidden" th:each="srv: ${num.servers}"  th:value="${srv.id}" name="servers">
+                    </div>
+                </div>
+                <div class="card_form__submit_change">
+                    <input th:formaction="@{__${#httpServletRequest.requestURI}__/?delHost}" class="change_delete" type="submit" name="delHost" value="Удалить">
+                    <input  class="change_changer" type="submit" name="changeRack" value="Изменить">
+                </div>
+            </form>
+        </div>
+
+        <div class="card_form" >
+            <h1>Хост виртуализации</h1>
+            <form th:action="@{#httpServletRequest.requestURI}" method="post" th:object="${hostVirtualization}">
+                <div class="card_form__input">
+                    <input type="hidden" th:value="${informationSystem}" name="informationSystem">
+                    <label>Имя хоста:</label>
+                    <input type="text" name="netname">
+                </div>
+                <div class="card_form__input">
+                    <div id="addthis"></div>
+                    <label>Сервер:</label>
+                    <div class="select_input_div">
+                        <select id="getSelect" onchange="selectchange()" class="select_input_all">
+                            <option value="0" selected>Добавить</option>
+                            <option  th:each="srv: ${servers}" th:text="${srv.typedevice +' '+srv.beginunit+' - '+srv.endunit+', Стойка ' +srv.serverRack.number}" th:value="${srv.id}" ></option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="card_form__submit_add">
+                    <input type="submit" name="addHost" value="Добавить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+function selectchange()
+{
+
+var txt = $("#getSelect option:selected").text();
+var val = $("#getSelect option:selected").val();
+if(val!='0'){
+$("#addthis").append("<div class='workstation_input' id='blck"+val+"'><div class='card_form__input'><input type='hidden' name='servers' value='"+val+"'><input value='"+txt+"' type='text'></div><div onclick=' delselect("+val+")' class='del_select'> <span>X</span></div></div>");;
+$("#getSelect option[value='"+val+"']").hide();
+$("#getSelect").prop('selectedIndex',0);
+}
+}
+     function delselect(val)
+    {
+        $("#blck"+val).remove();
+        $("#getSelect option[value='"+val+"']").show();
+    };
+</script>
+</body>
+</html>
